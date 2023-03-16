@@ -1,4 +1,5 @@
 import { Header } from '@/src/components/Header'
+import { Pagination } from '@/src/components/Pagination'
 import { SideBar } from '@/src/components/SideBar'
 import { Box, Button, Checkbox, Flex, Heading,Icon,Text, Table, Tbody, Td, Th, Thead,Tr } from '@chakra-ui/react'
 import React from 'react'
@@ -53,7 +54,7 @@ export default function User(){
             </Tbody>
 
           </Table>
-
+          <Pagination/>
         </Box>
       </Flex>
       
