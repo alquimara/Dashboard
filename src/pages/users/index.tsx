@@ -21,7 +21,7 @@ export default function User(){
         <Box flex="1" borderRadius="8" bg="gray.800" p={["6","8"]}>
           <Flex mb="8" justify="space-between" align="center">
             <Title title='Usuários'/>
-            <Link href="/users/create" passHref>
+            <Link href="/users/create" passHref legacyBehavior>
             <ButtonActon icon={RiAddLine} fontsize="20" colorScheme="pink">Criar novo</ButtonActon>
             </Link>
           </Flex>
