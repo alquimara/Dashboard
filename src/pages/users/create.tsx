@@ -1,5 +1,6 @@
 
 import { Header } from '@/src/components/Header'
+import { Title } from '@/src/components/Heading'
 import { InputComponent } from '@/src/components/Input'
 import { SideBar } from '@/src/components/SideBar'
 import { Box, Button, Divider, Flex, Heading, HStack, SimpleGrid, VStack } from '@chakra-ui/react'
@@ -12,7 +13,7 @@ export default function create(){
       <Flex  w="100%" my="6" maxWidth="1480px" mx="auto" px="6">
         <SideBar/>
         <Box flex="1" borderRadius="8" bg="gray.800" p="8">
-          <Heading size="lg" fontWeight="normal">Criar usuário</Heading>
+          <Title title='Criar usuário'/>
           <Divider my="6" borderColor="gray.700"/>
           <VStack spacing="8">
             <SimpleGrid minChildWidth="240px" spacing="8" w="100%">
@@ -28,7 +29,6 @@ export default function create(){
             <HStack spacing="4">
               <Button colorScheme="whiteAlpha">Cancelar</Button>
               <Button colorScheme="pink">Salvar</Button>
-
             </HStack>
 
           </Flex>

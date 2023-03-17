@@ -1,7 +1,9 @@
+import { ButtonActon } from '@/src/components/ButtonAction'
 import { Header } from '@/src/components/Header'
+import { Title } from '@/src/components/Heading'
 import { Pagination } from '@/src/components/Pagination'
 import { SideBar } from '@/src/components/SideBar'
-import { Box, Button, Checkbox, Flex, Heading,Icon,Text, Table, Tbody, Td, Th, Thead,Tr } from '@chakra-ui/react'
+import { Box,Checkbox, Flex,Text, Table, Tbody, Td, Th, Thead,Tr } from '@chakra-ui/react'
 import React from 'react'
 import { RiAddLine, RiPencilLine } from 'react-icons/ri'
 
@@ -13,13 +15,8 @@ export default function User(){
         <SideBar/>
         <Box flex="1" borderRadius="8" bg="gray.800" p="8">
           <Flex mb="8" justify="space-between" align="center">
-            <Heading size="lg" fontWeight="normal">
-              Usuários
-            </Heading>
-            <Button  as="a" size="sm" fontSize="sm" colorScheme="pink" leftIcon={<Icon fontSize="20" as={RiAddLine}/>}>
-              Criar Novo
-            </Button>
-
+            <Title title='Usuários'/>
+            <ButtonActon icon={RiAddLine} fontsize="20" colorScheme="pink">Criar novo</ButtonActon>
           </Flex>
           <Table colorScheme="whiteAlpha">
             <Thead>
@@ -45,14 +42,10 @@ export default function User(){
                 </Td>
                 <Td>15 de março de 2023</Td>
                 <Td>
-                <Button  as="a" size="sm" fontSize="sm" colorScheme="purple" leftIcon={<Icon fontSize="16" as={RiPencilLine}/>}>
-                  Editar
-                </Button>
+                  <ButtonActon icon={RiPencilLine} fontsize="16" colorScheme="purple">Editar</ButtonActon>
                 </Td>
               </Tr>
-
             </Tbody>
-
           </Table>
           <Pagination/>
         </Box>
