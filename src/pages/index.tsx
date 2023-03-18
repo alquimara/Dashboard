@@ -3,23 +3,28 @@ import { Flex,Button} from '@chakra-ui/react'
 import { InputComponent } from '../components/Input'
 import { useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { resolve } from 'path'
+import * as yup from 'yup'
+import {yupResolver} from '@hookform/resolvers/yup'
 
 type signInProps={
   email:string,
   password:string
 
 }
-
+const signInSchema= yup.object().shape({
+  email:yup.string().required('E-mail obrigatório').email('E-mail invalido'),
+  password:yup.string().required('Senha obrigatória')
+})
 
 export default function SignIn() {
-  const {register, handleSubmit,formState} =useForm()
+  const {register, handleSubmit,formState} =useForm({
+    resolver:yupResolver(signInSchema)
+  })
+  const {errors} = formState
 
-
+  
 const handleSignIn: SubmitHandler<signInProps>= async (values)=>{
   await new Promise(resolve=> setTimeout(resolve, 2000))
-  console.log(values)
-
 
   }
   return (
@@ -47,8 +52,8 @@ const handleSignIn: SubmitHandler<signInProps>= async (values)=>{
         gap="4"
         onSubmit={handleSubmit(handleSignIn)}
         >
-          <InputComponent type="email"  label='E-mail:' {...register('email')}/>
-          <InputComponent type="password"  label='Password:'{...register('password')}/>
+          <InputComponent type="email"  label='E-mail:' {...register('email')} error={errors.email}/>
+          <InputComponent type="password"  label='Password:'{...register('password')} error={errors.password}/>
           <Button 
           type='submit' 
           mt="6" 
