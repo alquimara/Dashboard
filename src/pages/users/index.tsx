@@ -21,7 +21,7 @@ export default function User(){
     base:false,
     lg: true
   })
-  const{data,isLoading,error} = useQuery('[users]',async()=>{
+  const{data,isLoading,isFetching, error} = useQuery('[users]',async()=>{
     const response =  await fetch('http://localhost:3000/api/users')
     const data = await response.json()
 
@@ -41,6 +41,8 @@ export default function User(){
 console.log(users)
     return users
 
+  },{
+    staleTime:1000 *5
   })
 
   
@@ -51,13 +53,15 @@ console.log(users)
         <SideBar/>
         <Box flex="1" borderRadius="8" bg="gray.800" p={["6","8"]}>
           <Flex mb="8" justify="space-between" align="center">
-            <Title title='Usuários'/>
+            <Title> Usuários
+            {!isLoading && isFetching && <Spinner size='sm' color='gray.500' ml='4' />}
+            </Title>
             <Link href="/users/create" passHref legacyBehavior>
             <ButtonActon icon={RiAddLine} fontsize="20" colorScheme="pink" title='Criar novo'/>
             </Link>
           </Flex>
-         {isLoading ? 
-         <Flex justify='center'>
+        {isLoading ? 
+        <Flex justify='center'>
           <Spinner/>
         </Flex>
         :error ?

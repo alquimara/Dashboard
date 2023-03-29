@@ -1,14 +1,14 @@
-import React from 'react'
+import React,{ReactNode} from 'react'
 import { Heading} from '@chakra-ui/react'
 
 interface headingProps{
-  title:string
+  children:ReactNode
 }
 
-export function Title({title}:headingProps){
+export function Title({children}:headingProps){
   return (
     <Heading size="lg" fontWeight="normal">
-    {title}
+    {children}
   </Heading>
   )
 }
