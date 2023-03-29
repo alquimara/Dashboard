@@ -9,6 +9,13 @@ import React, { useEffect } from 'react'
 import { RiAddLine, RiPencilLine } from 'react-icons/ri'
 import {useQuery} from 'react-query'
 
+interface User{
+  id:string,
+  name:string,
+  email:string,
+  createAt:string
+}
+
 export default function User(){
   const isWideVersion= useBreakpointValue({
     base:false,
@@ -17,11 +24,26 @@ export default function User(){
   const{data,isLoading,error} = useQuery('[users]',async()=>{
     const response =  await fetch('http://localhost:3000/api/users')
     const data = await response.json()
-    return data
+
+  
+    const users = data.users.map((user:User)=>{
+      return{
+        id:user.id,
+        name:user.name,
+        email:user.email,
+        createAt:new Date(user.createAt).toLocaleDateString('pt-Br',{
+          day:'2-digit',
+          month:'long',
+          year:'numeric'
+        })
+      }
+    })
+console.log(users)
+    return users
 
   })
-  console.log(data)
 
+  
   return (
     <Box>
       <Header/>
@@ -54,7 +76,7 @@ export default function User(){
               </Tr>
             </Thead>
             <Tbody>
-              {data.users.map((user)=>(
+              {data.map((user)=>(
                 <Tr key={user.id}>
                 <Td px={["4","4","6"]}>
                 <Checkbox colorScheme="pink"/>
