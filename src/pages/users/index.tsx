@@ -7,7 +7,10 @@ import { useUsers } from '@/src/service/hooks/useUsers'
 import { Box, Checkbox, Flex, Text, Table, Tbody, Td, Th, Thead, Tr, useBreakpointValue, Spinner } from '@chakra-ui/react';
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { Link as LinkChakra } from '@chakra-ui/react'
 import { RiAddLine, RiPencilLine } from 'react-icons/ri'
+import { queryClient } from '@/src/service/queryClient'
+import { api } from '@/src/service/api'
 
 
 interface User {
@@ -24,6 +27,19 @@ export default function User() {
     lg: true
   })
   const { data, isLoading, isFetching, error } = useUsers(page);
+
+
+  async function handlePrefetchUser(userId: string) {
+    await queryClient.prefetchQuery(['user', userId], async () => {
+      const response = await api.get(`/users/${userId}`)
+      return response.data
+
+    }),
+    {
+      staleTime: 1000 * 60 * 10 //10 min
+    }
+
+  }
 
 
 
@@ -68,7 +84,9 @@ export default function User() {
                         </Td>
                         <Td>
                           <Box>
-                            <Text fontWeight="bold">{user.name}</Text>
+                            <LinkChakra color='purple.400' onMouseEnter={() => handlePrefetchUser(user.id)}>
+                              <Text fontWeight="bold">{user.name}</Text>
+                            </LinkChakra>
                             <Text fontSize="sm" color="gray.300">{user.email}</Text>
                           </Box>
                         </Td>
